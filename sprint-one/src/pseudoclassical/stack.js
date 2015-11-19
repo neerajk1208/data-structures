@@ -3,6 +3,7 @@ var Stack = function() {
   // but try not not reference your old code in writing the new style.
   this.storage = {};
   this.stackSize = 0;
+  this.greet = "hello"
 };
 
 Stack.prototype.size = function() {
@@ -20,3 +21,4 @@ Stack.prototype.pop = function() {
     this.stackSize--;
     return deleted;
 }
+
