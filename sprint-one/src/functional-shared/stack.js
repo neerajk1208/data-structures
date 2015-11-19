@@ -1,24 +1,23 @@
 var Stack = function() {
   // Hey! Rewrite in the new style. Your code will wind up looking very similar,
   // but try not not reference your old code in writing the new style.
-  var someInstance = {};
-  someInstance.stackSize = 0;
-  
-  someInstance.storage = {};
 
-  //We can try putting storage inside some Instance
-  
+  var someInstance = {
+    stackSize: 0,
+    storage: {}
+  };
 
-  //this[storage] / this.storage
+  var extend = function(obj) {
+  var args = Array.prototype.slice.call(arguments)
+  for (var i = 0; i <args.length; i++) {
+    for (var key in args[i]) {
+      obj[key] = args[i][key]
+    }
+  }
+  return obj;
+}
 
-
-  //Just by adding key values to storage: storage[this.stackSize]
-
-
-  someInstance.size = stackMethods.size;
-  someInstance.push = stackMethods.push;
-  someInstance.pop = stackMethods.pop;
-
+  extend(someInstance, stackMethods)
   return someInstance;
 };
 
@@ -35,6 +34,16 @@ var stackMethods = {
     delete this.storage[this.stackSize-1]
     this.stackSize--;
     return deleted;
-   
-  }
+   }
 };
+
+//at the time of instantiation, the object will remain static
+
+//create Stack/
+
+//1. I want to modify a method on the created Stack. => decorator
+//1Q: will Stack have new function?
+
+//2. If, after instantiation, we modified the stackmethods object, will other instances get changed?
+//2Q: will original stackMethods be affected?
+
