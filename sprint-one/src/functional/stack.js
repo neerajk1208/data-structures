@@ -12,7 +12,6 @@ var Stack = function() {
 
   someInstance.pop = function() {
     //Create local variable that will store last property
-    debugger;
     var deleted = storage[stackSize - 1];
     //Delete the property
     delete storage[stackSize - 1];
