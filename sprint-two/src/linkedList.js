@@ -5,18 +5,19 @@ var LinkedList = function() {
   list.tail = null;
 
   list.addToTail = function(value) {
-    //Create a new node
-    //Assign a value to node
-    //Assign tail pointer to this new node
-    //if head is null, assign the head to it as well
-    //Previous node.next will be value of new node
-    if (list.tail === null) {
-      list.head = Node(value);
+    if (list.head === null) {
       list.tail = Node(value);
+      list.head = list.tail;
     }
-    else {
+    // (list.head !== null)
+    else if (list.head.next === null) {
+      console.log(list.head)
       var newNode = Node(value);
-      //list.head.next = newNode;
+      list.head.next = newNode;
+      list.tail = newNode;
+    }
+    else { 
+      var newNode = Node(value);
       list.tail.next = newNode;
       list.tail = newNode;
     }    
@@ -38,6 +39,9 @@ var LinkedList = function() {
     var workingNode = list.head;
     var checkNodes = function(node) {
       if (node.next === null) {
+        if (node.value === target) {
+          isTrue = true;
+        }
         return;
       } else if (node.value === target){
         isTrue = true;
@@ -60,6 +64,13 @@ var Node = function(value) {
 
   return node;
 };
+
+var test1 = LinkedList();
+
+test1.addToTail(4);
+test1.addToTail(5)
+
+test1
 
 
 /*
