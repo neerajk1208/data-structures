@@ -29,7 +29,6 @@ treeMethods.contains = function(target) {
     //loop through the children
       //call checkNode on each child
   //return isTrue
-  debugger;
   var isTrue = false;
   var checkNode = function(node) {
     if (node.value === target) {
