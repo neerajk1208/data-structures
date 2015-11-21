@@ -6,38 +6,43 @@ var HashTable = function() {
 HashTable.prototype.insert = function(k, v) {
   
   var index = getIndexBelowMaxForKey(k, this._limit);
-  //if index is not present in hastable
+  //within the index there will be an array of arrays
+  //Hash Index(0): [[Steven, Segal], [Neeraj, Koh]]
 
-  //if index doesn't exist
-    //this[index] = v
-  //otherwise
-    //set new index and make this[index+1] = v;
-    //link the k to it
+  //Key should go into index 0, Value into index 1 of each tuple
 
-    if (this[index] === undefined) {
-      this[index] = {};
-        this[index][k] = v;
-    } else {
-      this[index][k] = v;
-    }
-    return this[index][k];
-                
-    //create linkedlist object
-    //assign node value "Steven"
-    //assign node.next "Seagal"
-    //asign newNode
-  }  
+  if (this[index] === undefined) {
+    this[index] = [];
+    this[index].push([k,v]);
+  } else {
+    if (this[index][0][0] === k) {
+      this[index][0][1] = v
+    } else {  
+      this[index].push([k,v]);
+    }  
+  }
+    //if the key exists already in the array, overwrite the value
+    
+}  
 
 HashTable.prototype.retrieve = function(k) {
   var index = getIndexBelowMaxForKey(k, this._limit);
-    
-    for (var key in this[index]) {
-      if (key === k) {
-        return this[index][k];
-      }
-    }   
-    
-  };  
+  //Notice that the length > 1
+  if (!this[index]) {
+    return undefined;
+  }
+
+  if (this[index].length > 1) {
+    for (var i =0; i< this[index].length; i++) {
+      if (this[index][i][0] === k) {
+        return this[index][i][1];
+      }    
+    }
+  }  else {
+    return this[index][0][1]
+  }
+};
+   
   //start at the head. if the head matches k, return next.
 
 
@@ -48,8 +53,17 @@ HashTable.prototype.retrieve = function(k) {
 
 HashTable.prototype.remove = function(k) {
   var index = getIndexBelowMaxForKey(k, this._limit);
-  delete this[index];
+  if (this[index].length > 1) {
+    for (var i =0; i< this[index].length; i++) {
+      if (this[index][i][0] === k) {
+        delete this[index][i];
+      }    
+    }
+  } else {
+    delete this[index];
+  } 
 };
+
 
 
 
