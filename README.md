@@ -1,2 +1,2 @@
 #data-structures
-This is a project I completed as a student at [hackreactor](http://hackreactor.com). This project was worked on with a pair.
+Implementations of basic and advanced JavaScript data structures using various object instantiation patterns. 
